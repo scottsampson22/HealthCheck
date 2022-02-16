@@ -1,26 +1,21 @@
 name: Python package
 on:
-  schedule:
-    - cron: '30 8 * * *'
+  push:
+    branches:
+      - randomTime
 
 env:
-  USERNAME: ${{ secrets.USERNAME }}
-  PASSWORD: ${{ secrets.PASSWORD }}
+  TIME: $((RANDOM % 59))
 
 jobs:
   build:
     name: Setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.9
-      - name: Install Dependencies
+      - name: Test Random Output
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Run HealthCheck
-        run: |
-          python3 HealthCheck.py
+          echo $((RANDOM % 59))
+          echo $((RANDOM % 59))
+          echo $((RANDOM % 59))
+          echo $((RANDOM % 59))
+          echo $((RANDOM % 59))
